@@ -12,9 +12,14 @@ class TodoeyViewController: UITableViewController {
 
     
     var array = ["Buy Ethereum","Kill the Chinese","Model a ship"]
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 70
+        if let items = defaults.array(forKey: "TodoListArray") as? [String]{
+            array = items
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,6 +47,7 @@ class TodoeyViewController: UITableViewController {
         let alert = UIAlertController(title: "Add new Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add new", style: .default) { (action) in
             self.array.append(textField.text!)
+            self.defaults.set(self.array, forKey: "TodoListArray")
             self.tableView.reloadData()
         }
         alert.addTextField { (alertTextField) in
