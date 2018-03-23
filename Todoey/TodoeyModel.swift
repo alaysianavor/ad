@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodoeyModel{
+class TodoeyModel: Codable{
     var title: String = ""
     var done: Bool = false
 }

@@ -12,25 +12,15 @@ class TodoeyViewController: UITableViewController {
 
     
     var array = [TodoeyModel]()
-    let defaults = UserDefaults.standard
-    
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(dataFilePath)
         tableView.rowHeight = 70
-        let newItem = TodoeyModel()
-        newItem.title = "Buy Ethereum"
-        array.append(newItem)
-        
-        let newItem2 = TodoeyModel()
-        newItem2.title = "Open citibank account"
-        array.append(newItem2)
-        
-        let newItem3 = TodoeyModel()
-        newItem3.title = "Get Passport"
-        array.append(newItem3)
-        if let items = defaults.array(forKey: "TodoListArray") as? [TodoeyModel] {
-            array = items
-        }
+        loadItems()
+//        if let items = defaults.array(forKey: "TodoListArray") as? [TodoeyModel] {
+//            array = items
+//        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,8 +38,7 @@ class TodoeyViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         array[indexPath.row].done = !array[indexPath.row].done
-        print(array[indexPath.row])
-        tableView.reloadData()
+        saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -60,8 +49,8 @@ class TodoeyViewController: UITableViewController {
             let newItem = TodoeyModel()
             newItem.title = textField.text!
             self.array.append(newItem)
-            self.defaults.set(self.array, forKey: "TodoListArray")
-            self.tableView.reloadData()
+            self.saveItems()
+            
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new item"
@@ -69,6 +58,28 @@ class TodoeyViewController: UITableViewController {
         }
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        do{
+            let data = try encoder.encode(array)
+            try data.write(to: dataFilePath!)
+        }catch{
+            print("Error: \(error)")
+        }
+        self.tableView.reloadData()
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!){
+            let decoder = PropertyListDecoder()
+            do{
+                array = try decoder.decode([TodoeyModel].self, from: data)
+            }catch{
+                print(error)
+            }
+        }
     }
     
 }
