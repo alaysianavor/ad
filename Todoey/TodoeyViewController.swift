@@ -7,21 +7,25 @@
 //
 
 import UIKit
+import CoreData
 
 class TodoeyViewController: UITableViewController {
 
     
     var array = [TodoeyModel]()
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    var selectedCategory: Category?{
+        didSet{
+            loadItems()
+        }
+    }
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(dataFilePath)
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.rowHeight = 70
-        loadItems()
-//        if let items = defaults.array(forKey: "TodoListArray") as? [TodoeyModel] {
-//            array = items
-//        }
     }
+    
+    //MARK: - TableView methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoItemCell", for: indexPath)
@@ -42,14 +46,18 @@ class TodoeyViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    
+//MARK: - Add button
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add new Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add new", style: .default) { (action) in
-            let newItem = TodoeyModel()
-            newItem.title = textField.text!
-            self.array.append(newItem)
-            self.saveItems()
+        let newItem = TodoeyModel(context: self.context)
+        newItem.title = textField.text!
+        newItem.done = false
+        newItem.parentCategory = self.selectedCategory
+        self.array.append(newItem)
+        self.saveItems()
             
         }
         alert.addTextField { (alertTextField) in
@@ -59,28 +67,55 @@ class TodoeyViewController: UITableViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-    
+
+//MARK: - Save and Load from Persistent Cntainer
     func saveItems() {
-        let encoder = PropertyListEncoder()
         do{
-            let data = try encoder.encode(array)
-            try data.write(to: dataFilePath!)
+            try context.save()
         }catch{
-            print("Error: \(error)")
+            print("Error saving context \(error)")
         }
         self.tableView.reloadData()
     }
     
-    func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!){
-            let decoder = PropertyListDecoder()
-            do{
-                array = try decoder.decode([TodoeyModel].self, from: data)
-            }catch{
-                print(error)
+    func loadItems(with request: NSFetchRequest<TodoeyModel> = TodoeyModel.fetchRequest(), predicate: NSPredicate? = nil) {
+
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate,additionalPredicate])
+        }else{
+            request.predicate = categoryPredicate
+        }
+
+        do{
+            array = try context.fetch(request)
+        }catch{
+            print("Error in fetching: \(error)")
+        }
+        tableView.reloadData()
+    }
+    
+    
+    
+}
+
+//MARK: - Extension for Search Bar
+extension TodoeyViewController: UISearchBarDelegate{
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<TodoeyModel> = TodoeyModel.fetchRequest()
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        print(searchBar.text!)
+        loadItems(with: request, predicate: predicate)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0{
+        loadItems()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
             }
         }
     }
-    
 }
 
