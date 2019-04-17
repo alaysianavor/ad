@@ -91,23 +91,3 @@ class TodoeyViewController: UITableViewController {
     
     
 }
-
-//MARK: - Extension for Search Bar
-extension TodoeyViewController: UISearchBarDelegate{
-    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let request: NSFetchRequest<TodoeyModel> = TodoeyModel.fetchRequest()
-        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        print(searchBar.text!)
-        loadItems(with: request, predicate: predicate)
-    }
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0{
-        loadItems()
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
-        }
-    }
-}
-
