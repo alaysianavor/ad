@@ -10,31 +10,44 @@ class CategoryViewController: UITableViewController {
         super.viewDidLoad()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.rowHeight = 70
-        loadItems()
     }
 
     
     @IBAction func addbuttonPressed(_ sender: UIBarButtonItem) {
-        var textFeild = UITextField()
-        let alert = UIAlertController(title: "Add new Category", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add new", style: .default) { (action) in
-            let newItem = Category(context: self.context)
-            newItem.name = textFeild.text
-            self.array.append(newItem)
-            self.saveItems()
-            
-        }
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Enter new category name"
-            textFeild = alertTextField
-        }
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
+        let textField = UITextField()
+        let popupAlert = UIAlertController(title: "New List Item", message: "Name", preferredStyle: .alert)
         
+        // todoey
+        
+        popupAlert.addTextField { (textfield:UITextField) in textfield.placeholder = "New item"
+        }
+        popupAlert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action:UIAlertAction) in
+         guard let itemInput =  popupAlert.textFields?.first?.text else { return }
+        let newItem = Category(context: self.context)
+        newItem.name = textField.text
+        self.array.append(newItem)
+            let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .automatic)
+        
+        }))
+        
+        popupAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(popupAlert, animated: true, completion: nil)
     }
+
+
+
+    
+    /*
+    
+    
+    
+    
+    
+    
     //MARK: - TableView dataSource methods
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "identifierCell", for: indexPath)
         cell.textLabel?.text = array[indexPath.row].name
         return cell
     }
@@ -75,4 +88,6 @@ class CategoryViewController: UITableViewController {
         }
         self.tableView.reloadData()
     }
+}
+*/
 }
