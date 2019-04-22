@@ -26,7 +26,6 @@
 		B9264D452063FBAF00339F6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B9264D472063FBAF00339F6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9264D4A2063FBAF00339F6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B9264D4C2063FBAF00339F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9D350432067647300E7FEE7 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +67,6 @@
 				B9264D442063FBAF00339F6D /* Main.storyboard */,
 				B9264D472063FBAF00339F6D /* Assets.xcassets */,
 				B9264D492063FBAF00339F6D /* LaunchScreen.storyboard */,
-				B9264D4C2063FBAF00339F6D /* Info.plist */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -295,7 +293,6 @@
 				DEVELOPMENT_TEAM = 52WP6L4R59;
 				INFOPLIST_FILE = Todoey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vigneshwar.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -310,7 +307,6 @@
 				DEVELOPMENT_TEAM = 52WP6L4R59;
 				INFOPLIST_FILE = Todoey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vigneshwar.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
