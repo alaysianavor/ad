@@ -31,6 +31,11 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9E-n7-xnk">
+                                            <rect key="frame" x="332" y="11" width="38" height="36"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <state key="normal" image="x icon"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Ui8-WE-k3X" firstAttribute="leading" secondItem="5el-9v-hMm" secondAttribute="leading" constant="5" id="byu-j1-Jbq"/>
@@ -76,6 +81,13 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WCh-96-RcQ" id="7YO-7H-nIA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOA-Ij-tz2">
+                                            <rect key="frame" x="332" y="3" width="38" height="36"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                            <state key="normal" image="x icon"/>
+                                        </button>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -126,5 +138,6 @@
     </scenes>
     <resources>
         <image name="list" width="25" height="25"/>
+        <image name="x icon" width="170" height="170"/>
     </resources>
 </document>
