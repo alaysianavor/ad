@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Items-->
+        <!--TO DO-->
         <scene sceneID="sqK-my-s1n">
             <objects>
                 <tableViewController id="ewz-Id-faL" customClass="TodoeyViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -52,7 +52,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="To Do" image="list" landscapeImage="list" largeContentSizeImage="list" id="Cdi-EL-GVg"/>
-                    <navigationItem key="navigationItem" title="Items" id="H9m-zj-GWt">
+                    <navigationItem key="navigationItem" title="TO DO" id="H9m-zj-GWt">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SVm-Wy-pIh">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -100,7 +100,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="To Do" image="list" landscapeImage="list" largeContentSizeImage="list" id="xAG-7h-wcP"/>
-                    <navigationItem key="navigationItem" title="Items" id="K99-FQ-lVJ">
+                    <navigationItem key="navigationItem" title="TO DO" id="K99-FQ-lVJ">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qyo-eZ-fzP">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>

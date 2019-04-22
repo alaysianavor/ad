@@ -30,7 +30,7 @@ class CategoryViewController: UITableViewController {
         popupAlert.addTextField { (textfield:UITextField) in textfield.placeholder = "New item"
         }
         popupAlert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action:UIAlertAction) in
-         guard let itemInput =  popupAlert.textFields?.first?.text else { return }
+            guard (popupAlert.textFields?.first?.text) != nil else { return }
         let newItem = Category(context: self.context)
         newItem.name = textField.text
         self.array.append(newItem)
