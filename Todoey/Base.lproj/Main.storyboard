@@ -55,9 +55,6 @@
                     <navigationItem key="navigationItem" title="TO DO" id="H9m-zj-GWt">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SVm-Wy-pIh">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="addButtonPressed:" destination="ewz-Id-faL" id="W88-uO-i7Y"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

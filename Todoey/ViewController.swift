@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class TodoeyViewController: UITableViewController {
+class ViewController: UITableViewController {
 
     
     var array = [TodoeyModel]()
