@@ -4,7 +4,7 @@ import CoreData
 class ViewController: UITableViewController {
 
     
-    var array = [TodoeyModel]()
+    var array = [ToDoModel]()
     var selectedCategory: Category?{
         didSet{
             loadItems()
@@ -37,29 +37,6 @@ class ViewController: UITableViewController {
         saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    
-//MARK: - Add button
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        var textField = UITextField()
-        let alert = UIAlertController(title: "Add new Item", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add new", style: .default) { (action) in
-        let newItem = TodoeyModel(context: self.context)
-        newItem.title = textField.text!
-        newItem.done = false
-        newItem.parentCategory = self.selectedCategory
-        self.array.append(newItem)
-        self.saveItems()
-            
-        }
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create new item"
-            textField = alertTextField
-        }
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-
 //MARK: - Save and Load from Persistent Cntainer
     func saveItems() {
         do{
@@ -70,7 +47,7 @@ class ViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<TodoeyModel> = TodoeyModel.fetchRequest(), predicate: NSPredicate? = nil) {
+    func loadItems(with request: NSFetchRequest<ToDoModel> = ToDoModel.fetchRequest(), predicate: NSPredicate? = nil) {
 
         let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
         
